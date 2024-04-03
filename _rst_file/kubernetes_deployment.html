@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>CCNP Deployment Guide in Kubernetes Cluster &#8212; Confidential Cloud Native Primitives (CCNP)  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ccnp-deployment-guide-in-kubernetes-cluster">
+<span id="readme"></span><h1>CCNP Deployment Guide in Kubernetes Cluster<a class="headerlink" href="#ccnp-deployment-guide-in-kubernetes-cluster" title="Permalink to this heading">¶</a></h1>
+<p>Below diagram illustrates CCNP deployment process. In this document, it will use Intel TDX guest(TD) as an example of CVM and deploy CCNP on Intel TD nodes.</p>
+<a class="reference external image-reference" href="../../docs/ccnp-deployment-k8s.png"><img alt="Deployment diagram" src="../_images/ccnp-deployment-k8s.png" /></a>
+<section id="prepare-a-k8s-cluster-with-td-as-worker-nodes">
+<h2>Prepare a K8S cluster with TD as worker nodes<a class="headerlink" href="#prepare-a-k8s-cluster-with-td-as-worker-nodes" title="Permalink to this heading">¶</a></h2>
+<p>You can either create a K8S cluster in the TD or let the TD join an existing K8S cluster. Please choose one of the following step to make sure the K8S cluster is prepared with the TD running in it. CCNP will be deployed on the TD.</p>
+<section id="option-1-create-a-k8s-cluster-on-the-td">
+<h3>Option 1: Create a K8S cluster on the TD<a class="headerlink" href="#option-1-create-a-k8s-cluster-on-the-td" title="Permalink to this heading">¶</a></h3>
+<p>After TDs are started, users need to setup a K8S cluster in the TDs. It’s recommended to use <a class="reference external" href="https://docs.k3s.io/">K3S</a> to start a lightweight Kubernetes cluster for experimental purpose.</p>
+<p>Or you can refer to the <a class="reference external" href="https://kubernetes.io/docs/home/">k8s official documentation</a> to setup a cluster.</p>
+<p><em>NOTE: If the cluster has only one node (master node), the taint on the node needs to be removed.</em></p>
+</section>
+<section id="option-2-add-the-td-to-an-existing-k8s-cluster">
+<h3>Option 2: Add the TD to an existing K8S cluster<a class="headerlink" href="#option-2-add-the-td-to-an-existing-k8s-cluster" title="Permalink to this heading">¶</a></h3>
+<p>After TDs are started, users can let the TDs join an existing K8S cluster. Please refer to the <a class="reference external" href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-join/">k8s official documentation</a> for detailed steps.</p>
+</section>
+</section>
+<section id="deploy-ccnp">
+<h2>Deploy CCNP<a class="headerlink" href="#deploy-ccnp" title="Permalink to this heading">¶</a></h2>
+<p>The following scripts can help to generate CCNP images and deploy them in the TD nodes. <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> can run on either host or TD. Other scripts are supposed to run in the TD.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../container/build.sh">build.sh</a>: The tool will build docker images and push them to remote registry if required. Skip it if you already have docker images prepared.</p></li>
+<li><p><a class="reference external" href="../kubernetes/script/prerequisite.sh">prerequisite.sh</a>: This tool will complete the prerequisites for deploying CCNP on Ubuntu. For other distributions, you can follow the manual steps in <span class="xref std std-ref">Prerequisite Manually</span>.</p></li>
+<li><p><a class="reference external" href="../kubernetes/script/deploy-ccnp.sh">deploy-ccnp.sh</a>: The tool will deploy CCNP services as DaemonSet on TDs in the K8S cluster.</p></li>
+<li><p><a class="reference external" href="../kubernetes/script/deploy-ccnp-example.sh">deploy-ccnp-example.sh</a>: The tool will deploy an example pod with CCNP SDK installed.</p></li>
+<li><p><a class="reference external" href="../kubernetes/script/exec-ccnp-example.sh">exec-ccnp-example.sh</a>: The tool will show getting event logs, measurement and perform verification using CCNP in the pod.</p></li>
+</ul>
+<section id="prerequisite">
+<h3>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">¶</a></h3>
+<p>The prerequisite steps are required for CCNP deployment. Run <code class="docutils literal notranslate"><span class="pre">prerequisite.sh</span></code> in the TD.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd script
+$ sudo ./prerequisite.sh
+</pre></div>
+</div>
+</section>
+<section id="deploy-ccnp-services">
+<h3>Deploy CCNP services<a class="headerlink" href="#deploy-ccnp-services" title="Permalink to this heading">¶</a></h3>
+<p>CCNP deployment tool will deploy TDX device plugin and DaemonSets for CCNP event log, measurement and quote.
+Run below scripts on each TD node.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Deploy CCNP with user specified remote registry and image tag
+$ sudo ./deploy-ccnp.sh -r &lt;remote registry&gt; -g &lt;tag&gt;
+e.g.
+$ sudo ./deploy-ccnp.sh -r test-registry.intel.com/test -g 0.3
+
+# Delete existing CCNP and Deploy CCNP with user specified remote registry and image tag
+$ sudo ./deploy-ccnp.sh -r &lt;remote registry&gt; -g &lt;tag&gt; -d
+</pre></div>
+</div>
+<p>After it’s successful, you should see helm release <code class="docutils literal notranslate"><span class="pre">ccnp-device-plugin</span></code> and 3 DaemonSets in namespace <code class="docutils literal notranslate"><span class="pre">ccnp</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo helm list
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+ccnp-device-plugin      default         1               2023-12-27 08:12:05.814766198 +0000 UTC deployed        ccnp-device-plugin-0.1.0        latest
+$ sudo kubectl get ds -n ccnp
+NAME                 DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                                        AGE
+ccnp-server          1         1         1       1            1           intel.feature.node.kubernetes.io/tdx-guest=enabled   24h
+$ sudo kubectl get pods -n ccnp
+NAME                       READY   STATUS    RESTARTS      AGE
+ccnp-server-mqfjx          1/1     Running   2 (39s ago)   24h
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ccnp-usage-example">
+<h2>CCNP Usage Example<a class="headerlink" href="#ccnp-usage-example" title="Permalink to this heading">¶</a></h2>
+<p>The script <a class="reference external" href="../kubernetes/script/deploy-ccnp-example.sh">deploy-ccnp-example.sh</a> will deploy an example pod with CCNP SDK installed.
+The script <a class="reference external" href="../kubernetes/script/exec-ccnp-example.sh">exec-ccnp-example.sh</a> will use CCNP SDK to collect event log, measurement and perform verification in the example pod.</p>
+<ul class="simple">
+<li><p>Deploy example pod</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd script
+
+# Deploy CCNP example pod
+$ sudo ./deploy-ccnp-example.sh -r &lt;remote-registry&gt; -g &lt;tag&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Get Pod measurement, event logs, CC report and verify event logs using CCNP SDK.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Get measurement
+$ sudo ./exec-ccnp-example.sh -m
+
+# Get event logs
+$ sudo ./exec-ccnp-example.sh -e
+
+# Get CC report
+$ sudo ./exec-ccnp-example.sh -r
+
+# Verify event logs with measurements
+$ sudo ./exec-ccnp-example.sh -v
+</pre></div>
+</div>
+<p>The example output of verification can be found at <a class="reference external" href="../../docs/sample-output-for-container-measurement.txt">sample-output-for-container-measurement.txt</a> and
+<a class="reference external" href="../../docs/sample-output-for-container-eventlog.txt">sample-output-for-container-eventlog.txt</a>.</p>
+<section id="optional-ccnp-prerequisite-manual-steps">
+<h3>(Optional) CCNP Prerequisite Manual Steps<a class="headerlink" href="#optional-ccnp-prerequisite-manual-steps" title="Permalink to this heading">¶</a></h3>
+<p><strong>NOTE: Below are manual Steps of CCNP prerequisite for your reference. They can be skipped if prerequisite.sh is run successfully.</strong></p>
+<p>Basically the <code class="docutils literal notranslate"><span class="pre">prerequisite.sh</span></code> complete below steps to ensure <code class="docutils literal notranslate"><span class="pre">helm</span></code>, <code class="docutils literal notranslate"><span class="pre">docker</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code> are installed and check whether file permission is set correctly.
+You can also complete them following below steps manually.</p>
+<ul class="simple">
+<li><p>Install Helm on the TD nodes. Please refer to the <a class="reference external" href="https://helm.sh/docs/intro/quickstart/">HELM quick start</a>.</p></li>
+<li><p>Install docker on the TD nodes. Please refer to <a class="reference external" href="https://docs.docker.com/get-docker/">Get Docker</a>.</p></li>
+<li><p>Install python3-pip on the TD nodes. Please refer to <a class="reference external" href="https://pip.pypa.io/en/stable/installation/">pip document</a>.</p></li>
+<li><p>Set access permission to TD device node and ccnp working directory on the TD nodes.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo mkdir -p /etc/udev/rules.d
+$ sudo touch /etc/udev/rules.d/90-tdx.rules
+# Check TD device node on TD
+$ ls /dev/tdx*
+
+# If above output is &quot;/dev/tdx-guest&quot;
+$ sudo bash -c &#39;echo &quot;SUBSYSTEM==\&quot;misc\&quot;,KERNEL==\&quot;tdx-guest\&quot;,MODE=\&quot;0666\&quot;&quot;&gt;/etc/udev/rules.d/90-tdx.rules&#39;
+# If above output is &quot;/dev/tdx_guest&quot;
+$ sudo bash -c &#39;echo &quot;SUBSYSTEM==\&quot;misc\&quot;,KERNEL==\&quot;tdx_guest\&quot;,MODE=\&quot;0666\&quot;&quot;&gt;/etc/udev/rules.d/90-tdx.rules&#39;
+# make the udev setup effective
+$ sudo udevadm trigger
+
+$ sudo touch /usr/lib/tmpfiles.d/ccnp.conf
+$ sudo bash -c &#39;echo &quot;D /run/ccnp/uds 0757 - - -&quot;&gt;/usr/lib/tmpfiles.d/ccnp.conf&#39;
+# make the directory setup effective by running below command or restarting the node
+$ sudo systemd-tmpfiles --create
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Confidential Cloud Native Primitives (CCNP)</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Intel, ByteDance.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_rst_file/kubernetes_deployment.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

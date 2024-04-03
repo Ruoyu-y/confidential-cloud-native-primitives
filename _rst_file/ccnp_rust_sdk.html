@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Confidential Cloud-Native Primitives SDK for Rust &#8212; Confidential Cloud Native Primitives (CCNP)  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="confidential-cloud-native-primitives-sdk-for-rust">
+<span id="readme"></span><h1>Confidential Cloud-Native Primitives SDK for Rust<a class="headerlink" href="#confidential-cloud-native-primitives-sdk-for-rust" title="Permalink to this heading">¶</a></h1>
+<p>The Confidential Cloud-Native Primitives (CCNP) project is the solution targeted on simplifying the use of Trusted Execution Environment (TEE) in cloud-native environment. Currently, there are 2 parts included in CCNP, the services and the SDK.</p>
+<ul class="simple">
+<li><p>Service is designed to hide the complexity of different TEE platforms and provides common interfaces and scalability for cloud-native environment.</p></li>
+<li><p>SDK is to simplify the use of the service interface for development, it covers communication to the service and parses the results from the services.</p></li>
+</ul>
+<p>The service supports attestation, measurement fetching and event log collecting of various platforms including Intel Trusted Domain Extensions (TDX), Trusted Platform Modules (TPM) and AMD SEV-SNP. More platforms will be supported later.</p>
+<p>Attestation is a common process within TEE platform and TPM to verify if the software binaries were properly instantiated on a trusted platform. Third parties can leverage the attestation process to identify the trustworthiness of the platform (by checking the measurements or event logs) as well as the software running on it, in order to decide whether they shall put their confidential information/workload onto the platform.</p>
+<p>CCNP, as the overall framework for attestation, measurement and event log fetching, provides user with both customer-facing SDK and overall framework. By leveraging this SDK, user can easily retrieve different kinds of measurements or evidence such as event logs. Working along with different verification services (such as Amber) and configurable policies, user can validate the trustworthiness of the  platform and make further decision.</p>
+<p><a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/tree/main/sdk/rust">Source code</a>
+| <a class="reference external" href="https://github.com/cc-api/cc-trusted-api?tab=readme-ov-file#3-apis">API reference documentation</a></p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h3>
+<p>In order to work properly, user need to have the backend services ready on the TEE or TPM enabled platform first. Please refer to each deployment guide reside in the <a class="reference external" href="../../service/">service</a> folder to install the backend services.</p>
+</section>
+<section id="use-the-package">
+<h3>Use the package<a class="headerlink" href="#use-the-package" title="Permalink to this heading">¶</a></h3>
+<p>User can include CCNP client library for Rust in the <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> of their rust project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ccnp</span> <span class="o">=</span> <span class="p">{</span> <span class="n">git</span><span class="o">=</span><span class="s2">&quot;https://github.com/cc-api/confidential-cloud-native-primitives&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="key-concepts-and-usage">
+<h2>Key concepts and usage<a class="headerlink" href="#key-concepts-and-usage" title="Permalink to this heading">¶</a></h2>
+<p>There are three major functionalities provided in this SDK:</p>
+<ul class="simple">
+<li><p><span class="xref std std-ref">CC report fetching</span></p></li>
+<li><p><span class="xref std std-ref">Measurement fetching</span></p></li>
+<li><p><span class="xref std std-ref">Event log fetching</span></p></li>
+</ul>
+<section id="cc-report">
+<h3>CC Report<a class="headerlink" href="#cc-report" title="Permalink to this heading">¶</a></h3>
+<p>Using this SDK, user could fetch the report from different platforms, the service detect the platform automatically and return the report.</p>
+<section id="example-usage-of-the-sdk">
+<h4>Example usage of the SDK<a class="headerlink" href="#example-usage-of-the-sdk" title="Permalink to this heading">¶</a></h4>
+<p>The interface input of CC report is <code class="docutils literal notranslate"><span class="pre">nonce</span></code> and <code class="docutils literal notranslate"><span class="pre">user_data</span></code>, both of them are optional and will be measured in the report.
+Here are the example usages of the SDK:</p>
+<ul class="simple">
+<li><p>Fetch report with a <code class="docutils literal notranslate"><span class="pre">nonce</span></code> and <code class="docutils literal notranslate"><span class="pre">user_data</span></code></p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api_data</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">cc_type</span>::<span class="n">TeeType</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">tdx</span>::<span class="n">quote</span>::<span class="n">TdxQuote</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">ccnp</span>::<span class="n">sdk</span>::<span class="n">API</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">get_cc_report</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="cm">/***</span>
+<span class="cm">     * Note: in real user case, the nonce should come from attestation server</span>
+<span class="cm">     * side to prevent replay attack and the data should be generate by API caller</span>
+<span class="cm">     * according to user define spec</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen</span>::<span class="o">&lt;</span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen</span>::<span class="o">&lt;</span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="o">&gt;</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// retrieve cc report with API &quot;get_cc_report&quot;</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_report] to retrieve cc report with nonce and data!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_report</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">nonce</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="n">ExtraArgs</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting cc report: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;length of the cc report: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">report</span><span class="p">.</span><span class="n">cc_report</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// dump the cc report with API &quot;dump_cc_report&quot;</span>
+<span class="w">    </span><span class="c1">//info!(&quot;call cc trusted API [dump_cc_report] to dump cc report!&quot;);</span>
+<span class="w">    </span><span class="c1">//API::dump_cc_report(&amp;report.cc_report);</span>
+
+<span class="w">    </span><span class="c1">// parse the cc report with API &quot;parse_cc_report&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">report</span><span class="p">.</span><span class="n">cc_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TeeType</span>::<span class="n">TDX</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tdx_quote</span>: <span class="nc">TdxQuote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">CcReport</span>::<span class="n">parse_cc_report</span><span class="p">(</span><span class="n">report</span><span class="p">.</span><span class="n">cc_report</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error parse tdx quote: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;version = {}, report_data = {}&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">version</span><span class="p">,</span>
+<span class="w">            </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">report_data</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// show data of the struct TdxQuoteHeader</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call struct show function to show data of the struct TdxQuoteHeader!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// retrieve cc report with API &quot;get_cc_report&quot;</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_report] to retrieve cc report with no nonce and data!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">report1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_report</span><span class="p">(</span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="n">ExtraArgs</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting cc report: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;length of the cc report: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">report1</span><span class="p">.</span><span class="n">cc_report</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// parse the cc report with API &quot;parse_cc_report&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">report1</span><span class="p">.</span><span class="n">cc_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TeeType</span>::<span class="n">TDX</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tdx_quote</span>: <span class="nc">TdxQuote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">CcReport</span>::<span class="n">parse_cc_report</span><span class="p">(</span><span class="n">report1</span><span class="p">.</span><span class="n">cc_report</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error parse tdx quote: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;version = {}, report_data = {}&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">version</span><span class="p">,</span>
+<span class="w">            </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">report_data</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// show data of the struct TdxQuoteHeader</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call struct show function to show data of the struct TdxQuoteHeader!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="measurement">
+<h3>Measurement<a class="headerlink" href="#measurement" title="Permalink to this heading">¶</a></h3>
+<p>Using this SDK, user could fetch various measurements from different perspective and categories.
+Basic support on measurement focus on the platform measurements, including TEE report, values within TDX RTMR registers or values reside in TPM PCR registers.
+There’s also advanced support to provide measurement for a certain workload or container. The feature is still developing in progress.</p>
+<section id="id1">
+<h4>Example usage of the SDK<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h4>
+<p>Here are the example usages for measurement SDK:</p>
+<ul class="simple">
+<li><p>Fetch TEE measurement of the current pod(Fetch measurements of all IMR index)</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api_data</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">tcg</span>::<span class="n">TcgAlgorithmRegistry</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">ccnp</span>::<span class="n">sdk</span>::<span class="n">API</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">get_cc_measurement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// get default algorithm with API &quot;get_default_algorithm&quot;</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_default_algorithm] to get supported algorithm!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">defalt_algo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_default_algorithm</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">algorithm</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;supported algorithm: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">algorithm</span><span class="p">.</span><span class="n">algo_id_str</span><span class="p">);</span>
+<span class="w">            </span><span class="n">algorithm</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error get algorithm: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// get number of measurement registers</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_measurement_count] to get number of measurement registers!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_measurement_count</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;measurement registers count: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<span class="w">            </span><span class="n">count</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error get measurement count: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// retrive and show measurement registers</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_measurement] to get measurement register content!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tcg_digest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_measurement</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">defalt_algo</span><span class="p">.</span><span class="n">algo_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">tcg_digest</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">tcg_digest</span><span class="p">,</span>
+<span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error get measurement: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;show index = {}, algo = {:?}, hash = {:02X?}&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">index</span><span class="p">,</span>
+<span class="w">            </span><span class="n">tcg_digest</span><span class="p">.</span><span class="n">get_algorithm_id_str</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">tcg_digest</span><span class="p">.</span><span class="n">get_hash</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="event-log">
+<h3>Event log<a class="headerlink" href="#event-log" title="Permalink to this heading">¶</a></h3>
+<p>Using this SDK, user can fetch the event logs to assist the attestation/verification process. It also enables two different categories of event logs - for the platform or for a single workload/container.
+From platform perspective, it can support different Trusted Execution Environment and TPM. This sdk can also do fetching on certain number of event logs.</p>
+<section id="id2">
+<h4>Example usage of the SDK<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h4>
+<p>Here are the example usages of the SDK:</p>
+<ul class="simple">
+<li><p>Fetch event log of platform and check the information inside, then replay event logs</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api_data</span>::<span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">ccnp</span>::<span class="n">sdk</span>::<span class="n">API</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">get_cc_eventlog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// retrieve cc eventlog with API &quot;get_cc_eventlog&quot;</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_eventlog] to get container related eventlog without count!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">eventlogs1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_eventlog</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting eventlog: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;container event log count: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">eventlogs1</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// retrieve cc eventlog with API &quot;get_cc_eventlog&quot;</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_eventlog] to get container related eventlog with count number!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">eventlogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_eventlog</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting eventlog: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;event log count: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">eventlogs</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">eventlog</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">eventlogs</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">eventlog</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// replay cc eventlog with API &quot;replay_cc_eventlog&quot;</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [replay_cc_eventlog] to replay container related eventlog!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">replay_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">replay_cc_eventlog</span><span class="p">(</span><span class="n">eventlogs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
+<span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error replay eventlog: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// show replay results</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">replay_result</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">replay_results</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">replay_result</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="end-to-end-examples">
+<h2>End-to-end examples<a class="headerlink" href="#end-to-end-examples" title="Permalink to this heading">¶</a></h2>
+<p>TBA.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h2>
+<p>Troubleshooting information for the CCNP SDK can be found here.</p>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">¶</a></h2>
+<p>For more information about the Confidential Cloud-Native Primitives, please see our documentation page.</p>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading">¶</a></h2>
+<p>This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit the Contributor License Agreement site.</p>
+<p>When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.</p>
+<p>See <a class="reference external" href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for details on building, testing, and contributing to these libraries.</p>
+</section>
+<section id="provide-feedback">
+<h2>Provide Feedback<a class="headerlink" href="#provide-feedback" title="Permalink to this heading">¶</a></h2>
+<p>If you encounter any bugs or have suggestions, please file an issue in the Issues section of the project.</p>
+<!-- LINKS --></section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Confidential Cloud Native Primitives (CCNP)</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Intel, ByteDance.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_rst_file/ccnp_rust_sdk.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
