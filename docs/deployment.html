@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCNP Deployment &mdash; Confidential Cloud Native Primitives (CCNP)  documentation</title>
+  <title>CIMA Deployment &mdash; Confidential Cloud Native Primitives (CCNP)  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -14,13 +14,13 @@
   <![endif]-->
   
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CCNP Deployment Guide" href="general_deployment.html" />
-    <link rel="prev" title="CCNP Modules" href="modules.html" /> 
+    <link rel="next" title="CIMA Deployment Guide" href="general_deployment.html" />
+    <link rel="prev" title="CIMA Modules" href="modules.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,15 +44,15 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CCNP Modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">CCNP Deployment</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CIMA Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CIMA Deployment</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="general_deployment.html">General Deployment Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kubernetes_deployment.html">Kubernetes Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="docker_deployment.html">Docker Deployment</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="sdk.html">CCNP SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp.service.html">CCNP Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk.html">CIMA SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima.service.html">CIMA Service</a></li>
 </ul>
 </li>
 </ul>
@@ -71,8 +71,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">CCNP Modules</a></li>
-      <li class="breadcrumb-item active">CCNP Deployment</li>
+          <li class="breadcrumb-item"><a href="modules.html">CIMA Modules</a></li>
+      <li class="breadcrumb-item active">CIMA Deployment</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/deployment.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,28 +82,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ccnp-deployment">
-<h1>CCNP Deployment<a class="headerlink" href="#ccnp-deployment" title="Link to this heading">¶</a></h1>
+  <section id="cima-deployment">
+<h1>CIMA Deployment<a class="headerlink" href="#cima-deployment" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="general_deployment.html">General Deployment Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#build-ccnp-kernel">Build CCNP Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#build-cima-kernel">Build CIMA Kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="general_deployment.html#prepare-tdx-guest-image">Prepare TDX guest image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="general_deployment.html#create-a-td">Create a TD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#build-ccnp-images">Build CCNP images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#build-cima-images">Build CIMA images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="general_deployment.html#setup-qgs-and-pccs-on-the-host">Setup QGS and PCCS on the Host</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#deploy-ccnp-in-kubernetes">Deploy CCNP in Kubernetes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#deploy-ccnp-in-docker">Deploy CCNP in Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#deploy-cima-in-kubernetes">Deploy CIMA in Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_deployment.html#deploy-cima-in-docker">Deploy CIMA in Docker</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="kubernetes_deployment.html">Kubernetes Deployment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="kubernetes_deployment.html#prepare-a-k8s-cluster-with-td-as-worker-nodes">Prepare a K8S cluster with TD as worker nodes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kubernetes_deployment.html#deploy-ccnp">Deploy CCNP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kubernetes_deployment.html#ccnp-usage-example">CCNP Usage Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes_deployment.html#deploy-cima">Deploy CIMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes_deployment.html#cima-usage-example">CIMA Usage Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="docker_deployment.html">Docker Deployment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker_deployment.html#deploy-ccnp">Deploy CCNP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker_deployment.html#deploy-cima">Deploy CIMA</a></li>
 </ul>
 </li>
 </ul>
@@ -114,8 +114,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-left" title="CCNP Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="general_deployment.html" class="btn btn-neutral float-right" title="CCNP Deployment Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-left" title="CIMA Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="general_deployment.html" class="btn btn-neutral float-right" title="CIMA Deployment Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

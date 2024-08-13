@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Confidential Cloud-Native Primitives SDK for Rust &mdash; Confidential Cloud Native Primitives (CCNP)  documentation</title>
+  <title>Container Integrity Measurement Agent SDK for Rust &mdash; Confidential Cloud Native Primitives (CCNP)  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -14,13 +14,13 @@
   <![endif]-->
   
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CCNP Service" href="ccnp.service.html" />
-    <link rel="prev" title="CCNP RUST SDK" href="ccnp_rust_sdk.html" /> 
+    <link rel="next" title="CIMA Service" href="cima.service.html" />
+    <link rel="prev" title="CIMA RUST SDK" href="cima_rust_sdk.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,18 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CCNP Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">CCNP Deployment</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="sdk.html">CCNP SDK</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="ccnp_python_sdk.html">CCNP Python SDK</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ccnp_golang_sdk.html">CCNP Golang SDK</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="ccnp_rust_sdk.html">CCNP Rust SDK</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CIMA Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">CIMA Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="sdk.html">CIMA SDK</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cima_python_sdk.html">CIMA Python SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cima_golang_sdk.html">CIMA Golang SDK</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="cima_rust_sdk.html">CIMA Rust SDK</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Introduction</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp.service.html">CCNP Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima.service.html">CIMA Service</a></li>
 </ul>
 </li>
 </ul>
@@ -74,12 +74,12 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">CCNP Modules</a></li>
-          <li class="breadcrumb-item"><a href="sdk.html">CCNP SDK</a></li>
-          <li class="breadcrumb-item"><a href="ccnp_rust_sdk.html">CCNP RUST SDK</a></li>
-      <li class="breadcrumb-item active">Confidential Cloud-Native Primitives SDK for Rust</li>
+          <li class="breadcrumb-item"><a href="modules.html">CIMA Modules</a></li>
+          <li class="breadcrumb-item"><a href="sdk.html">CIMA SDK</a></li>
+          <li class="breadcrumb-item"><a href="cima_rust_sdk.html">CIMA RUST SDK</a></li>
+      <li class="breadcrumb-item active">Container Integrity Measurement Agent SDK for Rust</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/ccnp_rust_md.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/cima_rust_md.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -87,18 +87,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="confidential-cloud-native-primitives-sdk-for-rust">
-<span id="readme"></span><h1>Confidential Cloud-Native Primitives SDK for Rust<a class="headerlink" href="#confidential-cloud-native-primitives-sdk-for-rust" title="Link to this heading">¶</a></h1>
-<p>The Confidential Cloud-Native Primitives (CCNP) project is the solution targeted on simplifying the use of Trusted Execution Environment (TEE) in cloud-native environment. Currently, there are 2 parts included in CCNP, the services and the SDK.</p>
+  <section id="container-integrity-measurement-agent-sdk-for-rust">
+<span id="readme"></span><h1>Container Integrity Measurement Agent SDK for Rust<a class="headerlink" href="#container-integrity-measurement-agent-sdk-for-rust" title="Link to this heading">¶</a></h1>
+<p>The Container Integrity Measurement Agent (CIMA) project is the solution targeted on simplifying the use of Trusted Execution Environment (TEE) in cloud-native environment. Currently, there are 2 parts included in CIMA, the services and the SDK.</p>
 <ul class="simple">
 <li><p>Service is designed to hide the complexity of different TEE platforms and provides common interfaces and scalability for cloud-native environment.</p></li>
 <li><p>SDK is to simplify the use of the service interface for development, it covers communication to the service and parses the results from the services.</p></li>
 </ul>
 <p>The service supports attestation, measurement fetching and event log collecting of various platforms including Intel Trusted Domain Extensions (TDX), Trusted Platform Modules (TPM) and AMD SEV-SNP. More platforms will be supported later.</p>
 <p>Attestation is a common process within TEE platform and TPM to verify if the software binaries were properly instantiated on a trusted platform. Third parties can leverage the attestation process to identify the trustworthiness of the platform (by checking the measurements or event logs) as well as the software running on it, in order to decide whether they shall put their confidential information/workload onto the platform.</p>
-<p>CCNP, as the overall framework for attestation, measurement and event log fetching, provides user with both customer-facing SDK and overall framework. By leveraging this SDK, user can easily retrieve different kinds of measurements or evidence such as event logs. Working along with different verification services (such as Amber) and configurable policies, user can validate the trustworthiness of the  platform and make further decision.</p>
-<p><a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/tree/main/sdk/rust">Source code</a>
-| <a class="reference external" href="https://github.com/cc-api/cc-trusted-api?tab=readme-ov-file#3-apis">API reference documentation</a></p>
+<p>CIMA, as the overall framework for attestation, measurement and event log fetching, provides user with both customer-facing SDK and overall framework. By leveraging this SDK, user can easily retrieve different kinds of measurements or evidence such as event logs. Working along with different verification services (such as Amber) and configurable policies, user can validate the trustworthiness of the  platform and make further decision.</p>
+<p><a class="reference external" href="https://github.com/cc-api/container-integrity-measurement-agent/tree/main/sdk/rust">Source code</a>
+| <a class="reference external" href="https://github.com/cc-api/evidence-api?tab=readme-ov-file#3-apis">API reference documentation</a></p>
 <section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
 <section id="prerequisites">
@@ -107,8 +107,8 @@
 </section>
 <section id="use-the-package">
 <h3>Use the package<a class="headerlink" href="#use-the-package" title="Link to this heading">¶</a></h3>
-<p>User can include CCNP client library for Rust in the <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> of their rust project:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ccnp</span> <span class="o">=</span> <span class="p">{</span> <span class="n">git</span><span class="o">=</span><span class="s2">&quot;https://github.com/cc-api/confidential-cloud-native-primitives&quot;</span><span class="p">}</span>
+<p>User can include CIMA client library for Rust in the <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> of their rust project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cima</span> <span class="o">=</span> <span class="p">{</span> <span class="n">git</span><span class="o">=</span><span class="s2">&quot;https://github.com/cc-api/container-integrity-measurement-agent&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -131,52 +131,52 @@ Here are the example usages of the SDK:</p>
 <ul class="simple">
 <li><p>Fetch report with a <code class="docutils literal notranslate"><span class="pre">nonce</span></code> and <code class="docutils literal notranslate"><span class="pre">user_data</span></code></p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api_data</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">cc_type</span>::<span class="n">TeeType</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">tdx</span>::<span class="n">quote</span>::<span class="n">TdxQuote</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">ccnp</span>::<span class="n">sdk</span>::<span class="n">API</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">api</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">api_data</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">cc_type</span><span class="p">::</span><span class="n">TeeType</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">tdx</span><span class="p">::</span><span class="n">quote</span><span class="p">::</span><span class="n">TdxQuote</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cima</span><span class="p">::</span><span class="n">sdk</span><span class="p">::</span><span class="n">API</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">rand</span><span class="p">::</span><span class="n">Rng</span><span class="p">;</span>
 
-<span class="k">fn</span> <span class="nf">get_cc_report</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">get_cc_report</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">     </span><span class="cm">/***</span>
 <span class="cm">     * Note: in real user case, the nonce should come from attestation server</span>
 <span class="cm">     * side to prevent replay attack and the data should be generate by API caller</span>
 <span class="cm">     * according to user define spec</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen</span>::<span class="o">&lt;</span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="o">&gt;</span><span class="p">());</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen</span>::<span class="o">&lt;</span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64</span><span class="p">::</span><span class="n">encode</span><span class="p">(</span><span class="n">rand</span><span class="p">::</span><span class="n">thread_rng</span><span class="p">().</span><span class="n">gen</span><span class="p">::</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64</span><span class="p">::</span><span class="n">encode</span><span class="p">(</span><span class="n">rand</span><span class="p">::</span><span class="n">thread_rng</span><span class="p">().</span><span class="n">gen</span><span class="p">::</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">u8</span><span class="p">;</span><span class="w"> </span><span class="mi">32</span><span class="p">]</span><span class="o">&gt;</span><span class="p">());</span>
 
 <span class="w">    </span><span class="c1">// retrieve cc report with API &quot;get_cc_report&quot;</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_report] to retrieve cc report with nonce and data!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_report</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">nonce</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="n">ExtraArgs</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_cc_report] to retrieve cc report with nonce and data!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_cc_report</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">nonce</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="n">ExtraArgs</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting cc report: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;length of the cc report: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">report</span><span class="p">.</span><span class="n">cc_report</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
 
 <span class="w">    </span><span class="c1">// dump the cc report with API &quot;dump_cc_report&quot;</span>
-<span class="w">    </span><span class="c1">//info!(&quot;call cc trusted API [dump_cc_report] to dump cc report!&quot;);</span>
+<span class="w">    </span><span class="c1">//info!(&quot;call evidence API [dump_cc_report] to dump cc report!&quot;);</span>
 <span class="w">    </span><span class="c1">//API::dump_cc_report(&amp;report.cc_report);</span>
 
 <span class="w">    </span><span class="c1">// parse the cc report with API &quot;parse_cc_report&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">report</span><span class="p">.</span><span class="n">cc_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TeeType</span>::<span class="n">TDX</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tdx_quote</span>: <span class="nc">TdxQuote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">CcReport</span>::<span class="n">parse_cc_report</span><span class="p">(</span><span class="n">report</span><span class="p">.</span><span class="n">cc_report</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">report</span><span class="p">.</span><span class="n">cc_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TeeType</span><span class="p">::</span><span class="n">TDX</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tdx_quote</span><span class="p">:</span><span class="w"> </span><span class="nc">TdxQuote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">CcReport</span><span class="p">::</span><span class="n">parse_cc_report</span><span class="p">(</span><span class="n">report</span><span class="p">.</span><span class="n">cc_report</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error parse tdx quote: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">                </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">};</span>
 <span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span>
 <span class="w">            </span><span class="s">&quot;version = {}, report_data = {}&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">version</span><span class="p">,</span>
-<span class="w">            </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">report_data</span><span class="p">)</span>
+<span class="w">            </span><span class="n">base64</span><span class="p">::</span><span class="n">encode</span><span class="p">(</span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">report_data</span><span class="p">)</span>
 <span class="w">        </span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// show data of the struct TdxQuoteHeader</span>
@@ -185,30 +185,30 @@ Here are the example usages of the SDK:</p>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// retrieve cc report with API &quot;get_cc_report&quot;</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_report] to retrieve cc report with no nonce and data!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">report1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_report</span><span class="p">(</span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="n">ExtraArgs</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_cc_report] to retrieve cc report with no nonce and data!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">report1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_cc_report</span><span class="p">(</span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="nb">None</span><span class="p">,</span><span class="w"> </span><span class="n">ExtraArgs</span><span class="w"> </span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting cc report: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;length of the cc report: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">report1</span><span class="p">.</span><span class="n">cc_report</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
 
 <span class="w">    </span><span class="c1">// parse the cc report with API &quot;parse_cc_report&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">report1</span><span class="p">.</span><span class="n">cc_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TeeType</span>::<span class="n">TDX</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tdx_quote</span>: <span class="nc">TdxQuote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">CcReport</span>::<span class="n">parse_cc_report</span><span class="p">(</span><span class="n">report1</span><span class="p">.</span><span class="n">cc_report</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">report1</span><span class="p">.</span><span class="n">cc_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TeeType</span><span class="p">::</span><span class="n">TDX</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tdx_quote</span><span class="p">:</span><span class="w"> </span><span class="nc">TdxQuote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">CcReport</span><span class="p">::</span><span class="n">parse_cc_report</span><span class="p">(</span><span class="n">report1</span><span class="p">.</span><span class="n">cc_report</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error parse tdx quote: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">                </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">};</span>
 <span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span>
 <span class="w">            </span><span class="s">&quot;version = {}, report_data = {}&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">version</span><span class="p">,</span>
-<span class="w">            </span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">report_data</span><span class="p">)</span>
+<span class="w">            </span><span class="n">base64</span><span class="p">::</span><span class="n">encode</span><span class="p">(</span><span class="n">tdx_quote</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">report_data</span><span class="p">)</span>
 <span class="w">        </span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// show data of the struct TdxQuoteHeader</span>
@@ -231,47 +231,47 @@ There’s also advanced support to provide measurement for a certain workload or
 <ul class="simple">
 <li><p>Fetch TEE measurement of the current pod(Fetch measurements of all IMR index)</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api_data</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">tcg</span>::<span class="n">TcgAlgorithmRegistry</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">ccnp</span>::<span class="n">sdk</span>::<span class="n">API</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">api</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">api_data</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">tcg</span><span class="p">::</span><span class="n">TcgAlgorithmRegistry</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cima</span><span class="p">::</span><span class="n">sdk</span><span class="p">::</span><span class="n">API</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
 
-<span class="k">fn</span> <span class="nf">get_cc_measurement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">get_cc_measurement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// get default algorithm with API &quot;get_default_algorithm&quot;</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_default_algorithm] to get supported algorithm!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">defalt_algo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_default_algorithm</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_default_algorithm] to get supported algorithm!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">defalt_algo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_default_algorithm</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">algorithm</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;supported algorithm: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">algorithm</span><span class="p">.</span><span class="n">algo_id_str</span><span class="p">);</span>
 <span class="w">            </span><span class="n">algorithm</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error get algorithm: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="c1">// get number of measurement registers</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_measurement_count] to get number of measurement registers!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_measurement_count</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_measurement_count] to get number of measurement registers!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_measurement_count</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;measurement registers count: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
 <span class="w">            </span><span class="n">count</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error get measurement count: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="c1">// retrive and show measurement registers</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_measurement] to get measurement register content!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_cc_measurement] to get measurement register content!&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tcg_digest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_measurement</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">defalt_algo</span><span class="p">.</span><span class="n">algo_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">tcg_digest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_cc_measurement</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">defalt_algo</span><span class="p">.</span><span class="n">algo_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">tcg_digest</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">tcg_digest</span><span class="p">,</span>
 <span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error get measurement: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">                </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">};</span>
 <span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span>
@@ -296,31 +296,31 @@ From platform perspective, it can support different Trusted Execution Environmen
 <ul class="simple">
 <li><p>Fetch event log of platform and check the information inside, then replay event logs</p></li>
 </ul>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">cctrusted_base</span>::<span class="n">api_data</span>::<span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">ccnp</span>::<span class="n">sdk</span>::<span class="n">API</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">log</span>::<span class="o">*</span><span class="p">;</span>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">api</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">evidence_api</span><span class="p">::</span><span class="n">api_data</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cima</span><span class="p">::</span><span class="n">sdk</span><span class="p">::</span><span class="n">API</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">log</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
 
-<span class="k">fn</span> <span class="nf">get_cc_eventlog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">get_cc_eventlog</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// retrieve cc eventlog with API &quot;get_cc_eventlog&quot;</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_eventlog] to get container related eventlog without count!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">eventlogs1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_eventlog</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_cc_eventlog] to get container related eventlog without count!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">eventlogs1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_cc_eventlog</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting eventlog: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;container event log count: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">eventlogs1</span><span class="p">.</span><span class="n">len</span><span class="p">());</span>
 
 <span class="w">    </span><span class="c1">// retrieve cc eventlog with API &quot;get_cc_eventlog&quot;</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [get_cc_eventlog] to get container related eventlog with count number!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">eventlogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">get_cc_eventlog</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [get_cc_eventlog] to get container related eventlog with count number!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">eventlogs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">get_cc_eventlog</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error getting eventlog: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
@@ -330,12 +330,12 @@ From platform perspective, it can support different Trusted Execution Environmen
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// replay cc eventlog with API &quot;replay_cc_eventlog&quot;</span>
-<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call cc trusted API [replay_cc_eventlog] to replay container related eventlog!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">replay_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span>::<span class="n">replay_cc_eventlog</span><span class="p">(</span><span class="n">eventlogs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;call evidence API [replay_cc_eventlog] to replay container related eventlog!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">replay_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">API</span><span class="p">::</span><span class="n">replay_cc_eventlog</span><span class="p">(</span><span class="n">eventlogs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">q</span><span class="p">,</span>
 <span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">error</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;error replay eventlog: {:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
-<span class="w">            </span><span class="n">std</span>::<span class="n">process</span>::<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="p">::</span><span class="n">process</span><span class="p">::</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
@@ -355,17 +355,17 @@ From platform perspective, it can support different Trusted Execution Environmen
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<p>Troubleshooting information for the CCNP SDK can be found here.</p>
+<p>Troubleshooting information for the CIMA SDK can be found here.</p>
 </section>
 <section id="next-steps">
 <h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
-<p>For more information about the Confidential Cloud-Native Primitives, please see our documentation page.</p>
+<p>For more information about the Container Integrity Measurement Agent, please see our documentation page.</p>
 </section>
 <section id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h2>
 <p>This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit the Contributor License Agreement site.</p>
 <p>When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.</p>
-<p>See <a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for details on building, testing, and contributing to these libraries.</p>
+<p>See <a class="reference external" href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for details on building, testing, and contributing to these libraries.</p>
 </section>
 <section id="provide-feedback">
 <h2>Provide Feedback<a class="headerlink" href="#provide-feedback" title="Link to this heading">¶</a></h2>
@@ -377,8 +377,8 @@ From platform perspective, it can support different Trusted Execution Environmen
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ccnp_rust_sdk.html" class="btn btn-neutral float-left" title="CCNP RUST SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ccnp.service.html" class="btn btn-neutral float-right" title="CCNP Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cima_rust_sdk.html" class="btn btn-neutral float-left" title="CIMA RUST SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cima.service.html" class="btn btn-neutral float-right" title="CIMA Service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

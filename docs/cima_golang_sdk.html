@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCNP PYTHON SDK &mdash; Confidential Cloud Native Primitives (CCNP)  documentation</title>
+  <title>CIMA GOLANG SDK &mdash; Confidential Cloud Native Primitives (CCNP)  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -14,13 +14,13 @@
   <![endif]-->
   
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Confidential Cloud-Native Primitives SDK for Python" href="ccnp_python_md.html" />
-    <link rel="prev" title="CCNP SDK" href="sdk.html" /> 
+    <link rel="next" title="Container Integrity Measurement Agent SDK for Golang" href="cima_golang_md.html" />
+    <link rel="prev" title="CIMA Package" href="cima.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,19 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CCNP Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="deployment.html">CCNP Deployment</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="sdk.html">CCNP SDK</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">CCNP Python SDK</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ccnp_python_md.html">Introduction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ccnp.html">Python packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CIMA Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">CIMA Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="sdk.html">CIMA SDK</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cima_python_sdk.html">CIMA Python SDK</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CIMA Golang SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cima_golang_md.html">Introduction</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="ccnp_golang_sdk.html">CCNP Golang SDK</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ccnp_rust_sdk.html">CCNP Rust SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cima_rust_sdk.html">CIMA Rust SDK</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp.service.html">CCNP Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima.service.html">CIMA Service</a></li>
 </ul>
 </li>
 </ul>
@@ -75,11 +74,11 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">CCNP Modules</a></li>
-          <li class="breadcrumb-item"><a href="sdk.html">CCNP SDK</a></li>
-      <li class="breadcrumb-item active">CCNP PYTHON SDK</li>
+          <li class="breadcrumb-item"><a href="modules.html">CIMA Modules</a></li>
+          <li class="breadcrumb-item"><a href="sdk.html">CIMA SDK</a></li>
+      <li class="breadcrumb-item active">CIMA GOLANG SDK</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/ccnp_python_sdk.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/cima_golang_sdk.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -87,22 +86,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ccnp-python-sdk">
-<h1>CCNP PYTHON SDK<a class="headerlink" href="#ccnp-python-sdk" title="Link to this heading">¶</a></h1>
+  <section id="cima-golang-sdk">
+<h1>CIMA GOLANG SDK<a class="headerlink" href="#cima-golang-sdk" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ccnp_python_md.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#getting-started">Getting started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#key-concepts-and-usage">Key concepts and usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#end-to-end-examples">End-to-end examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#next-steps">Next steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#contributing">Contributing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp_python_md.html#provide-feedback">Provide Feedback</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ccnp.html">Python packages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ccnp.html#module-ccnp.sdk">ccnp.sdk module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cima_golang_md.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#key-concepts-and-usage">Key concepts and usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#end-to-end-examples">End-to-end examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#next-steps">Next steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima_golang_md.html#provide-feedback">Provide Feedback</a></li>
 </ul>
 </li>
 </ul>
@@ -113,8 +108,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="sdk.html" class="btn btn-neutral float-left" title="CCNP SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ccnp_python_md.html" class="btn btn-neutral float-right" title="Confidential Cloud-Native Primitives SDK for Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cima.html" class="btn btn-neutral float-left" title="CIMA Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cima_golang_md.html" class="btn btn-neutral float-right" title="Container Integrity Measurement Agent SDK for Golang" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

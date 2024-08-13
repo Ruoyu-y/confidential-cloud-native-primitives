@@ -1,9 +1,9 @@
-CCNP SDK
+CIMA SDK
 ========
 
 .. toctree::
    :maxdepth: 3
 
-   CCNP Python SDK <ccnp_python_sdk.rst>
-   CCNP Golang SDK <ccnp_golang_sdk.rst>
-   CCNP Rust SDK <ccnp_rust_sdk.rst>
+   CIMA Python SDK <cima_python_sdk.rst>
+   CIMA Golang SDK <cima_golang_sdk.rst>
+   CIMA Rust SDK <cima_rust_sdk.rst>

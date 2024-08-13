@@ -1,10 +1,10 @@
-CCNP Package
+CIMA Package
 ============
 
-ccnp.sdk module
+cima.sdk module
 ---------------
 
-.. automodule:: ccnp.sdk
+.. automodule:: cima.sdk
    :members:
    :undoc-members:
    :show-inheritance:

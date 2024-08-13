@@ -1,9 +1,9 @@
-CCNP Modules
+CIMA Modules
 ============
 
 .. toctree::
    :maxdepth: 2
 
-   CCNP Deployment <deployment>
-   CCNP SDK <sdk>
-   CCNP Service <ccnp.service>
+   CIMA Deployment <deployment>
+   CIMA SDK <sdk>
+   CIMA Service <cima.service>

@@ -14,13 +14,13 @@
   <![endif]-->
   
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CCNP SDK" href="sdk.html" />
-    <link rel="prev" title="CCNP Deployment Guide in Kubernetes Cluster" href="kubernetes_deployment.html" /> 
+    <link rel="next" title="CIMA SDK" href="sdk.html" />
+    <link rel="prev" title="CIMA Deployment Guide in Kubernetes Cluster" href="kubernetes_deployment.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,18 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CCNP Modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="deployment.html">CCNP Deployment</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">CIMA Modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deployment.html">CIMA Deployment</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="general_deployment.html">General Deployment Guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kubernetes_deployment.html">Kubernetes Deployment</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Docker Deployment</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#deploy-ccnp">Deploy CCNP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-cima">Deploy CIMA</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="sdk.html">CCNP SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ccnp.service.html">CCNP Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk.html">CIMA SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cima.service.html">CIMA Service</a></li>
 </ul>
 </li>
 </ul>
@@ -74,8 +74,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">CCNP Modules</a></li>
-          <li class="breadcrumb-item"><a href="deployment.html">CCNP Deployment</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">CIMA Modules</a></li>
+          <li class="breadcrumb-item"><a href="deployment.html">CIMA Deployment</a></li>
       <li class="breadcrumb-item active">Docker Compose Deployment</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/docker_deployment.rst.txt" rel="nofollow"> View page source</a>
@@ -88,16 +88,16 @@
              
   <section id="docker-compose-deployment">
 <span id="readme"></span><h1>Docker Compose Deployment<a class="headerlink" href="#docker-compose-deployment" title="Link to this heading">¶</a></h1>
-<p>The CCNP can be deployed in the confidential VMs using docker compose. In this document, it will use Intel TDX guest(TD) as an example of CVM and deploy CCNP on the TD using docker compose.</p>
-<a class="reference external image-reference" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/docs/ccnp-deployment-docker.png"><img alt="Deployment diagram" src="ccnp-deployment-docker.png" /></a>
-<section id="deploy-ccnp">
-<h2>Deploy CCNP<a class="headerlink" href="#deploy-ccnp" title="Link to this heading">¶</a></h2>
-<p>The following scripts can help to generate CCNP images and deploy them in the TD nodes. <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> can run on either host or TD. Other scripts are supposed to run in the TD.</p>
+<p>The CIMA can be deployed in the confidential VMs using docker compose. In this document, it will use Intel TDX guest(TD) as an example of CVM and deploy CIMA on the TD using docker compose.</p>
+<a class="reference external image-reference" href="../../docs/cima-deployment-docker.png"><img alt="Deployment diagram" src="../../docs/cima-deployment-docker.png" /></a>
+<section id="deploy-cima">
+<h2>Deploy CIMA<a class="headerlink" href="#deploy-cima" title="Link to this heading">¶</a></h2>
+<p>The following scripts can help to generate CIMA images and deploy them in the TD nodes. <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> can run on either host or TD. Other scripts are supposed to run in the TD.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/container/build.sh">build.sh</a>: The tool will build docker images and push them to remote registry if required. Skip it if you already have docker images prepared.</p></li>
-<li><p><a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/deployment/docker-compose/prerequisite.sh">prerequisite.sh</a>: This tool will complete the prerequisites for deploying CCNP on Ubuntu. For other distributions, you can follow the manual steps in <span class="xref std std-ref">Prerequisite Manually</span>.</p></li>
-<li><p><a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/deployment/docker-compose/deploy-ccnp.sh">deploy-ccnp.sh</a>: The tool will deploy CCNP service using docker compose.</p></li>
-<li><p><a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/deployment/docker-compose/exec-ccnp-example.sh">exec-ccnp-example.sh</a>: The tool will create a docker container, getting container event logs, measurement and performing verification using CCNP SDK.</p></li>
+<li><p><a class="reference external" href="../../container/build.sh">build.sh</a>: The tool will build docker images and push them to remote registry if required. Skip it if you already have docker images prepared.</p></li>
+<li><p><a class="reference external" href="./prerequisite.sh">prerequisite.sh</a>: This tool will complete the prerequisites for deploying CIMA on Ubuntu.</p></li>
+<li><p><a class="reference external" href="./deploy-cima.sh">deploy-cima.sh</a>: The tool will deploy CIMA service using docker compose.</p></li>
+<li><p><a class="reference external" href="./exec-cima-example.sh">exec-cima-example.sh</a>: The tool will create a docker container, getting container event logs, measurement and performing verification using CIMA SDK.</p></li>
 </ul>
 <section id="prerequisite">
 <h3>Prerequisite<a class="headerlink" href="#prerequisite" title="Link to this heading">¶</a></h3>
@@ -106,13 +106,13 @@
 </pre></div>
 </div>
 </section>
-<section id="deploy-ccnp-service">
-<h3>Deploy CCNP Service<a class="headerlink" href="#deploy-ccnp-service" title="Link to this heading">¶</a></h3>
-<p>Use the script <a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/deployment/docker-compose/depoly-ccnp.sh">deploy-ccnp.sh</a> to deploy the CCNP services.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Deploy CCNP with user specified remote registry and image tag
-$ sudo ./deploy-ccnp.sh -r &lt;remote registry&gt; -g &lt;tag&gt;
+<section id="deploy-cima-service">
+<h3>Deploy CIMA Service<a class="headerlink" href="#deploy-cima-service" title="Link to this heading">¶</a></h3>
+<p>Use the script <a class="reference external" href="./depoly-cima.sh">deploy-cima.sh</a> to deploy the CIMA services.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Deploy CIMA with user specified remote registry and image tag
+$ sudo ./deploy-cima.sh -r &lt;remote registry&gt; -g &lt;tag&gt;
 e.g.
-$ sudo ./deploy-ccnp.sh -r test-registry.intel.com/test -g 0.3
+$ sudo ./deploy-cima.sh -r test-registry.intel.com/test -g 0.5
 </pre></div>
 </div>
 <p>This script has some options as below.</p>
@@ -125,15 +125,15 @@ $ sudo ./deploy-ccnp.sh -r test-registry.intel.com/test -g 0.3
 <p>You will see below container running after the deployment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo docker ps
 CONTAINER ID   IMAGE             COMMAND               CREATED        STATUS      PORTS     NAMES
-3a9de1a9c7d7  ccnp-server:0.3  &quot;/usr/bin/ccnp_serve…&quot; 36 seconds ago  Up 34 seconds  ccnp-server-ctr-ccnp-server-1
+3a9de1a9c7d7  cima-server:0.5  &quot;/usr/bin/cima_serve…&quot; 36 seconds ago  Up 34 seconds  cima-server-ctr-cima-server-1
 </pre></div>
 </div>
 </section>
-<section id="deploy-ccnp-usage-example">
-<h3>Deploy CCNP Usage Example<a class="headerlink" href="#deploy-ccnp-usage-example" title="Link to this heading">¶</a></h3>
-<p>The script <a class="reference external" href="https://github.com/cc-api/confidential-cloud-native-primitives/blob/main/deployment/docker-compose/exec-ccnp-example.sh">exec-ccnp-example.sh</a> will launch a container <code class="docutils literal notranslate"><span class="pre">ccnp-example</span></code>.
-It will get measurement, event logs and cc_report using CCNP SDK and save the output in <code class="docutils literal notranslate"><span class="pre">/tmp/docker_ccnp/example.log</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo ./exec-ccnp-example.sh -r test-registry.intel.com/test -g 0.3
+<section id="deploy-cima-usage-example">
+<h3>Deploy CIMA Usage Example<a class="headerlink" href="#deploy-cima-usage-example" title="Link to this heading">¶</a></h3>
+<p>The script <a class="reference external" href="./exec-cima-example.sh">exec-cima-example.sh</a> will launch a container <code class="docutils literal notranslate"><span class="pre">cima-example</span></code>.
+It will get measurement, event logs and cc_report using CIMA SDK and save the output in <code class="docutils literal notranslate"><span class="pre">/tmp/docker_cima/example.log</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo ./exec-cima-example.sh -r test-registry.intel.com/test -g 0.5
 </pre></div>
 </div>
 <p>This script has some options as below.</p>
@@ -147,7 +147,7 @@ It will get measurement, event logs and cc_report using CCNP SDK and save the ou
 <p>You will see below container running after the deployment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo docker ps
 CONTAINER ID   IMAGE               COMMAND            CREATED          STATUS       PORTS     NAMES
-e815b6edafcb   ccnp-example:0.3  &quot;tail -f /dev/null&quot;  17 seconds ago  Up 15 seconds ccnp-example-ctr-ccnp-example-1
+e815b6edafcb   cima-example:0.5  &quot;tail -f /dev/null&quot;  17 seconds ago  Up 15 seconds cima-example-ctr-cima-example-1
 </pre></div>
 </div>
 </section>
@@ -158,21 +158,6 @@ e815b6edafcb   ccnp-example:0.3  &quot;tail -f /dev/null&quot;  17 seconds ago  
 </pre></div>
 </div>
 </section>
-<section id="optional-ccnp-prerequisite-manual-steps">
-<h3>(Optional) CCNP Prerequisite Manual Steps<a class="headerlink" href="#optional-ccnp-prerequisite-manual-steps" title="Link to this heading">¶</a></h3>
-<p><strong>NOTE: Below are manual Steps of CCNP prerequisite for your reference. They can be skipped if prerequisite.sh is run successfully.</strong></p>
-<p>Basically the <code class="docutils literal notranslate"><span class="pre">prerequisite.sh</span></code> complete below steps to ensure <code class="docutils literal notranslate"><span class="pre">docker</span></code> is installed and set device permission. You can also complete them following below steps manually.</p>
-<ul>
-<li><p>Install docker on the TD nodes. Please refer to <a class="reference external" href="https://docs.docker.com/get-docker/">Get Docker</a>.</p></li>
-<li><p>Change the access privilege of the TDX device.
-.. code-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ chmod 0666 $(find /dev/ -name &quot;tdx*&quot;)
-</pre></div>
-</div>
-</li>
-<li><p>Clean up <code class="docutils literal notranslate"><span class="pre">/tmp/docker_ccnp</span></code>.</p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -180,8 +165,8 @@ e815b6edafcb   ccnp-example:0.3  &quot;tail -f /dev/null&quot;  17 seconds ago  
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="kubernetes_deployment.html" class="btn btn-neutral float-left" title="CCNP Deployment Guide in Kubernetes Cluster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sdk.html" class="btn btn-neutral float-right" title="CCNP SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="kubernetes_deployment.html" class="btn btn-neutral float-left" title="CIMA Deployment Guide in Kubernetes Cluster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sdk.html" class="btn btn-neutral float-right" title="CIMA SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
